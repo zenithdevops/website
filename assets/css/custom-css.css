@@ -1,0 +1,11 @@
+.mybanner {
+  display: flex;
+  justify-content: left; /* horizontal center */
+  align-items: center;    /* vertical center */
+  height: 100%; /* or set a specific height */
+}
+
+.mybanner-logo {
+  max-width: 100%; /* makes sure image scales nicely */
+  height: auto;
+}
