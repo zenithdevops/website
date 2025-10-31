@@ -5,10 +5,14 @@ on:
   #  branches: ["main"]   # Trigger on push to main
   workflow_dispatch:     # Allow manual run from Actions tab
 
+permissions:
+  contents: write
+
 jobs:
   run-bash:
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'github-actions[bot]' }}
+    ##if: ${{ github.actor != 'github-actions[bot]' }}
+    if: github.actor != 'github-actions[bot]'
 
     steps:
       - name: Checkout repository
@@ -46,22 +50,15 @@ jobs:
               echo -e "\n\t🟢 Did not found/grep: ${_dir}"
           done
 
-      ##- name: Commit changes
-      ##  run: |
-      ##    git config --local user.name "github-actions[bot]"
-      ##    git config --local user.email "github-actions[bot]@users.noreply.github.com"
-      ##    git add -A
-      ##    git diff --cached --quiet || git commit -m "Auto-update: $(date)"
-      ##    git push
-      
-      - name: Debug git push
+      - name: Commit changes
         run: |
-          git remote -v
-          git branch
-          git status
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "test commit" || echo "No changes to commit"
-          git push origin HEAD
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          #git config user.name "github-actions[bot]"
+          #git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          git add .
+          
+          ##git diff --cached --quiet || git commit -m "Auto-update: $(date)"
+          git commit -m "Auto-update: $(date)" || echo "No changes to commit"
+          git push
