@@ -15,6 +15,10 @@ jobs:
 
       - name: Run Bash commands
         run: |
+          grep -nr --exclude-dir='.git' --exclude-dir='.github' 'href="/"'      && sleep 10 || echo "NOTFOUND href/"
+          grep -nr --exclude-dir='.git' --exclude-dir='.github' 'src="/"'       && sleep 10 || echo "NOTFOUND slash src/"
+          grep -nr --exclude-dir='.git' --exclude-dir='.github' 'src="/about"'  && sleep 10 || echo "NOTFOUND /about"
+
           dirs2process=('/assets' '/credits' '/style-guide')
 
           # DEBUG block #
