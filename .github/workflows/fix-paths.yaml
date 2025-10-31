@@ -16,8 +16,8 @@ jobs:
 
       - name: Run Bash commands
         run: |
-          find . -type f -not -path "*/.git*" -exec sed -i 's|href="/"|href="./"|g' {} \;
-          find . -type f -not -path "*/.git*" -exec sed -i 's|src="/"|src="./"|g'.  {} \;
+          find . -type f -not -path "*/.git*" -exec sed -i 's|href=\"/\"|href=\"./\"|g' {} \;
+          find . -type f -not -path "*/.git*" -exec sed -i 's|src=\"/\"|src=\"./\"|g'.  {} \;
 
           grep -nr --exclude-dir='.git' --exclude-dir='.github' 'href="/"'      && sleep 10 || echo "NOTFOUND href/"
           grep -nr --exclude-dir='.git' --exclude-dir='.github' 'src="/"'       && sleep 10 || echo "NOTFOUND slash src/"
