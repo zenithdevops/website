@@ -42,16 +42,6 @@ jobs:
               echo -e "\n\t🟢 Did not found/grep: ${_dir}"
           done
 
-          git status
-
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "Auto-update: $(date -u +'%Y-%m-%d %H:%M:%S')"
-            git push
-          fi
-
       - name: Commit changes
         run: |
           git config --local user.name "github-actions[bot]"
