@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0            # required to push
+          persist-credentials: true # default is true
 
       - name: Run Bash commands
         run: |
