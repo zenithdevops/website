@@ -40,3 +40,5 @@ jobs:
               echo -e "\n\t🔴 Found/grep something in: ${_dir}"                   || \
               echo -e "\n\t🟢 Did not found/grep: ${_dir}"
           done
+
+          git status
