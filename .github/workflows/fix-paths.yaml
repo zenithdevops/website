@@ -19,3 +19,7 @@ jobs:
           for _dir in ${dirs2process[*]} ;do
             find . -type f -not -path "*/.git*" -exec sed -i "s|${_dir}|.${_dir}|g" {} +
           done
+
+          for _dir in ${dirs2process[*]} ;do
+            grep -nr "${_dir}" --exclude-dir=.git --exclude-dir=.github
+          done
