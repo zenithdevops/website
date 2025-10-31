@@ -21,5 +21,5 @@ jobs:
           done
 
           for _dir in ${dirs2process[*]} ;do
-            grep -nr "${_dir}" --exclude-dir=.git --exclude-dir=.github
+            grep -nr "${_dir}" --exclude-dir=.git --exclude-dir=.github || echo "Did not found/grep: ${_dir}"
           done
