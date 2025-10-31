@@ -8,6 +8,7 @@ on:
 jobs:
   run-bash:
     runs-on: ubuntu-latest
+    if: ${{ github.actor != 'github-actions[bot]' }}
 
     steps:
       - name: Checkout repository
@@ -42,3 +43,11 @@ jobs:
           done
 
           git status
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Auto-update: $(date -u +'%Y-%m-%d %H:%M:%S')"
+            git push
+          fi
