@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0            # required to push
+          ref: main
           persist-credentials: true # default is true
 
       - name: Run Bash commands
@@ -45,10 +46,22 @@ jobs:
               echo -e "\n\t🟢 Did not found/grep: ${_dir}"
           done
 
-      - name: Commit changes
+      ##- name: Commit changes
+      ##  run: |
+      ##    git config --local user.name "github-actions[bot]"
+      ##    git config --local user.email "github-actions[bot]@users.noreply.github.com"
+      ##    git add -A
+      ##    git diff --cached --quiet || git commit -m "Auto-update: $(date)"
+      ##    git push
+      
+          - name: Debug git push
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git remote -v
+          git branch
+          git status
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git diff --cached --quiet || git commit -m "Auto-update: $(date)"
-          git push
+          git commit -m "test commit" || echo "No changes to commit"
+          git push origin HEAD
+
