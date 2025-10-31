@@ -1,0 +1,21 @@
+name: Run Bash Commands
+
+on:
+  #push:
+  #  branches: ["main"]   # Trigger on push to main
+  workflow_dispatch:     # Allow manual run from Actions tab
+
+jobs:
+  run-bash:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Bash commands
+        run: |
+          dirs2process=('./assets' './credits' './style-guide')
+          for _dir in ${dirs2process[*]} ;do
+            find . -type f -not -path "*/.git*" -exec sed -i "s|${_dir}|.${_dir}|g" {} +
+          done
